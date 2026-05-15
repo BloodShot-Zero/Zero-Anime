@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title id="docTitle">Zero Anime</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --blue: #060EED;
+  --cyan: #3AFAFD;
+  --dark: #05070d;
+  --card: #0d1320;
+  --glass: rgba(13, 19, 32, 0.85);
+  --border: #182744;
+}
+
+body {
+  background: var(--dark);
+  color: #e2e8f0;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--cyan), var(--blue));
+  border-radius: 20px;
+}
+
+.page {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.active-page {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* ==========================
+LANDING
+========================== */
+
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: radial-gradient(ellipse at center, #0a1628 0%, #000 100%);
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  margin-bottom: 50px;
+  background: linear-gradient(90deg, var(--cyan), var(--blue), var(--cyan));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-align: center;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gate-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.gate-card {
+  width: 100%;
+  height: 480px;
+  background: #08101d;
+  border-radius: 40px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 3px solid var(--blue);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  flex: 1;
+}
+
+.gate-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: var(--cyan);
+  box-shadow: 0 0 40px rgba(58, 250, 253, 0.3), 0 0 80px rgba(6, 14, 237, 0.2);
+}
+
+.gate-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.gate-card:hover img {
+  transform: scale(1.1);
+}
+
+.gate-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px 30px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.95));
+}
+
+.gate-overlay h2 {
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+}
+
+@media (max-width: 768px) {
+  .landing {
+    padding: 20px;
+  }
+  .gate-wrapper {
+    gap: 15px;
+  }
+  .gate-card {
+    height: 300px;
+    border-radius: 24px;
+  }
+  .gate-overlay {
+    padding: 20px 15px;
+  }
+  .gate-overlay h2 {
+    font-size: 1.3rem;
+  }
+}
+
+/* ==========================
+APP
+========================== */
+
+.app-container {
+  display: none;
+  padding: 20px;
+  max-width: 1500px;
+  margin: auto;
+  min-height: 100vh;
+}
+
+.topbar {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  padding: 16px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  position: sticky;
+  top: 20px;
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 900;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.8);
+  color: #94a3b8;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.nav button:hover {
+  background: rgba(6, 14, 237, 0.2);
+  color: white;
+  border-color: var(--blue);
+}
+
+.nav button.active {
+  background: linear-gradient(135deg, var(--blue), #1a1a80);
+  color: white;
+  box-shadow: 0 0 20px rgba(58, 250, 253, 0.25);
+  border-color: var(--cyan);
+}
+
+/* ==========================
+SEARCH
+========================== */
+
+.search-wrap {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.search-wrap input {
+  width: 100%;
+  padding: 16px 24px;
+  background: rgba(16, 24, 38, 0.8);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.search-wrap input:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(58, 250, 253, 0.15);
+}
+
+.search-results {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--cyan);
+  border-radius: 20px;
+  overflow: hidden;
+  display: none;
+  z-index: 999;
+  max-height: 450px;
+  overflow-y: auto;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.search-item {
+  display: flex;
+  gap: 15px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.search-item:hover {
+  background: rgba(22, 35, 63, 0.8);
+}
+
+.search-item img {
+  width: 50px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+/* ==========================
+ANNOUNCEMENT
+========================== */
+
+.announce {
+  padding: 16px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(8, 16, 29, 0.9), rgba(17, 27, 49, 0.9));
+  border: 1px solid rgba(58, 250, 253, 0.3);
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  backdrop-filter: blur(10px);
+}
+
+.announce img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--cyan);
+  flex-shrink: 0;
+}
+
+/* ==========================
+HOME
+========================== */
+
+.home-layout {
+  display: grid;
+  grid-template-columns: 2fr 0.85fr;
+  gap: 25px;
+  align-items: start;
+}
+
+@media(max-width: 1000px) {
+  .home-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  color: #f1f5f9;
+}
+
+.section-title .line {
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(180deg, var(--cyan), var(--blue));
+  border-radius: 999px;
+}
+
+/* ==========================
+ANIME CARDS
+========================== */
+
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 18px;
+}
+
+.anime-card {
+  background: linear-gradient(145deg, #0c1220, #0a0e1a);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.anime-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--cyan);
+  box-shadow: 0 10px 40px rgba(58, 250, 253, 0.15);
+}
+
+.anime-card .card-image-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  overflow: hidden;
+}
+
+.anime-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.anime-card:hover img {
+  transform: scale(1.08);
+}
+
+.anime-card .card-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cyan);
+  border: 1px solid rgba(58, 250, 253, 0.3);
+}
+
+.anime-info {
+  padding: 14px;
+}
+
+.anime-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #f8fafc;
+}
+
+.anime-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #7dd3fc;
+  font-weight: 600;
+}
+
+.type-tag {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), #1e3a8a);
+  font-size: 0.65rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: white;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================
+SCHEDULE
+========================== */
+
+.schedule-box {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  height: max-content;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.schedule-item {
+  background: linear-gradient(90deg, rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.4));
+  padding: 14px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 3px solid var(--cyan);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-left: 3px solid var(--cyan);
+}
+
+.schedule-item:hover {
+  background: rgba(23, 35, 61, 0.9);
+  transform: translateX(4px);
+  border-color: rgba(58, 250, 253, 0.3);
+}
+
+.schedule-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #f1f5f9;
+}
+
+.schedule-time {
+  font-size: 0.8rem;
+  color: var(--cyan);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ==========================
+DETAIL PAGE
+========================== */
+
+.back-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), #1e3a8a);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  border: 1px solid rgba(58, 250, 253, 0.2);
+}
+
+.back-btn:hover {
+  transform: translateX(-4px);
+  box-shadow: 0 0 20px rgba(58, 250, 253, 0.2);
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 30px;
+}
+
+@media(max-width: 1100px) {
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Player */
+.player-section {
+  margin-bottom: 24px;
+}
+
+.player-box {
+  background: #000;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 2px solid var(--blue);
+  position: relative;
+  box-shadow: 0 0 40px rgba(6, 14, 237, 0.15);
+}
+
+.player-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  height: 0;
+  background: #000;
+}
+
+.player-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--cyan);
+  z-index: 10;
+  gap: 12px;
+}
+
+.loading-overlay::after {
+  content: "";
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(58, 250, 253, 0.2);
+  border-top-color: var(--cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  color: #ef4444;
+  z-index: 11;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+}
+
+.error-message button {
+  padding: 10px 24px;
+  background: linear-gradient(135deg, var(--blue), #1e3a8a);
+  border: none;
+  border-radius: 999px;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  transition: all 0.2s;
+  border: 1px solid rgba(58, 250, 253, 0.3);
+}
+
+.error-message button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(58, 250, 253, 0.2);
+}
+
+.player-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: rgba(8, 16, 29, 0.9);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.control-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.control-btn {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: rgba(16, 24, 38, 0.8);
+  border: 1px solid var(--border);
+  color: #94a3b8;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.control-btn:hover {
+  border-color: var(--cyan);
+  color: white;
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, var(--cyan), #06b6d4);
+  color: #000;
+  border-color: var(--cyan);
+  box-shadow: 0 0 15px rgba(58, 250, 253, 0.3);
+}
+
+.episode-nav-btn {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+}
+
+/* Episodes */
+.episodes-section {
+  margin-top: 20px;
+}
+
+.episodes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.episode-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.episode-btn {
+  padding: 12px 8px;
+  background: linear-gradient(145deg, #101826, #0c1220);
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+  text-align: center;
+  color: #94a3b8;
+  position: relative;
+  overflow: hidden;
+}
+
+.episode-btn:hover {
+  background: linear-gradient(145deg, #1a2744, #162038);
+  border-color: var(--cyan);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.episode-btn.active {
+  background: linear-gradient(135deg, var(--blue), #1e3a8a);
+  border-color: var(--cyan);
+  color: white;
+  box-shadow: 0 0 15px rgba(58, 250, 253, 0.2);
+}
+
+.episode-btn.watched {
+  border-color: #10b981;
+  color: #10b981;
+}
+
+.episode-btn .ep-title {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  margin-top: 2px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  height: max-content;
+}
+
+.sidebar .poster-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 2px solid var(--border);
+}
+
+.sidebar .poster-wrap img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sidebar h2 {
+  font-size: 1.6rem;
+  margin-bottom: 12px;
+  line-height: 1.3;
+  color: #f8fafc;
+}
+
+.genre-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.genre {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--blue), #1e3a8a);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #dbeafe;
+  border: 1px solid rgba(58, 250, 253, 0.15);
+}
+
+.synopsis {
+  line-height: 1.7;
+  color: #94a3b8;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.meta-item {
+  background: rgba(17, 24, 39, 0.6);
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.meta-label {
+  color: #64748b;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.meta-value {
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+/* ==========================
+SKELETON LOADING
+========================== */
+
+.skeleton {
+  background: linear-gradient(90deg, #0f172a 25%, #1e293b 50%, #0f172a 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 12px;
+}
+
+.skeleton-card {
+  height: 280px;
+  border-radius: 20px;
+}
+
+.skeleton-text {
+  height: 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+}
+
+.skeleton-text.short {
+  width: 60%;
+}
+
+/* ==========================
+EMPTY & FOOTER
+========================== */
+
+.empty {
+  padding: 60px 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.empty h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+  color: #94a3b8;
+}
+
+.loading {
+  padding: 40px;
+  text-align: center;
+  color: var(--cyan);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 60px;
+  padding: 40px 20px;
+  text-align: center;
+  color: #475569;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+/* ==========================
+CONTINUE WATCHING
+========================== */
+
+.continue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.continue-card {
+  background: linear-gradient(145deg, #0c1220, #0a0e1a);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: 1px solid var(--border);
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+}
+
+.continue-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-4px);
+}
+
+.continue-card img {
+  width: 60px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.continue-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.continue-title {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.continue-meta {
+  font-size: 0.75rem;
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 999px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 999px;
+  transition: width 0.3s;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--cyan);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  z-index: 10000;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+
+.toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-container {
+    padding: 12px;
+  }
+  .topbar {
+    padding: 12px 16px;
+    top: 10px;
+  }
+  .logo {
+    font-size: 1.4rem;
+  }
+  .nav button {
+    padding: 8px 12px;
+    font-size: 0.75rem;
+  }
+  .anime-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .episode-list {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+  .meta-grid {
+    grid-template-columns: 1fr;
+  }
+  .player-controls {
+    justify-content: center;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+<div class="landing" id="landingPage">
+  <h1 class="hero-title">⚡ ZERO ANIME</h1>
+  <div class="gate-wrapper">
+    <div class="gate-card" id="animeGate">
+      <img src="https://i.ibb.co/nNg1X5Hb/images-96.jpg" alt="Anime Gate">
+      <div class="gate-overlay"><h2>📺 Anime</h2></div>
+    </div>
+    <div class="gate-card" id="hentaiGate">
+      <img src="https://i.ibb.co/Ng8mV3sn/IMG-20260514-175823.jpg" alt="Hentai Gate">
+      <div class="gate-overlay"><h2>🔞 Hentai</h2></div>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app-container" id="appContainer">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="logo" id="topLogo">⚡ ZERO ANIME</div>
+    <div class="nav">
+      <button class="active" data-page="home">🏠 Home</button>
+      <button data-page="library">📚 Library</button>
+      <button data-page="schedule">📅 Ani-Dates</button>
+      <button id="exitBtn">🚪 Exit</button>
+    </div>
+  </div>
+
+  <!-- Search -->
+  <div class="search-wrap">
+    <input type="text" id="searchInput" placeholder="🔍 Search anime, hentai, episodes..." autocomplete="off" />
+    <div class="search-results" id="searchResults"></div>
+  </div>
+
+  <!-- Announcement -->
+  <div class="announce">
+    <img src="https://i.ibb.co/nNg1X5Hb/images-96.jpg" alt="Announce">
+    <div>
+      <h3 style="font-size:1rem;margin-bottom:4px;">📢 MegaPlay Player Active</h3>
+      <p style="font-size:0.85rem;color:#94a3b8;">Sub/Dub switching • Auto-next episode • Proper episode lists • Continue watching</p>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <div class="page active-page" id="homePage">
+    <!-- Continue Watching -->
+    <div id="continueSection" style="display:none;">
+      <div class="section-title"><span class="line"></span><span>▶️ Continue Watching</span></div>
+      <div class="continue-grid" id="continueGrid"></div>
+    </div>
+
+    <div class="home-layout">
+      <div>
+        <div class="section-title"><span class="line"></span><span id="featuredTitleText">🔥 Featured Watching</span></div>
+        <div class="anime-grid" id="featuredGrid"></div>
+      </div>
+      <div class="schedule-box">
+        <div class="section-title"><span class="line"></span><span id="todayTitleText">🗓️ Airing Today</span></div>
+        <div class="schedule-list" id="todaySchedule"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBRARY -->
+  <div class="page" id="libraryPage">
+    <div class="section-title"><span class="line"></span><span id="libraryTitleText">📚 Complete Library</span></div>
+    <div class="anime-grid" id="libraryGrid"></div>
+  </div>
+
+  <!-- SCHEDULE -->
+  <div class="page" id="schedulePage">
+    <div class="section-title"><span class="line"></span><span id="scheduleTitleText">📅 Weekly Dates</span></div>
+    <div class="schedule-list" id="fullSchedule"></div>
+  </div>
+
+  <!-- DETAIL -->
+  <div class="page" id="detailPage">
+    <button class="back-btn" id="backBtn">← Back to Browse</button>
+    <div id="detailContent"></div>
+  </div>
+
+  <footer>Zero Anime - Powered by Jikan & MegaPlay</footer>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================
+CONFIG & STATE
+========================= */
+const CONFIG = {
+  API: "https://api.jikan.moe/v4",
+  PLAYER: {
+    base: "https://megaplay.buzz/stream",
+    type: "mal" // Using MAL ID endpoint
+  },
+  DEBOUNCE: 350,
+  RETRY_ATTEMPTS: 3,
+  RETRY_DELAY: 1500,
+  CACHE_TTL: 5 * 60 * 1000 // 5 minutes
+};
+
+const state = {
+  mode: "anime", // "anime" | "hentai"
+  currentPage: "home",
+  currentAnime: null,
+  currentEpisode: 1,
+  currentType: "sub",
+  episodes: [],
+  isLoading: false,
+  searchTimeout: null,
+  cache: new Map()
+};
+
+/* =========================
+UTILITIES
+========================= */
+function $(sel) { return document.querySelector(sel); }
+function $$(sel) { return document.querySelectorAll(sel); }
+
+function showToast(msg, duration = 3000) {
+  const toast = $("#toast");
+  toast.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(() => toast.classList.remove("show"), duration);
+}
+
+function getTitle(anime) {
+  return anime?.title_english || anime?.title || "Unknown Title";
+}
+
+function getImage(anime, size = "large") {
+  return anime?.images?.jpg?.[`${size}_image_url`] || anime?.images?.jpg?.image_url || "";
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function fetchWithRetry(url, attempts = CONFIG.RETRY_ATTEMPTS) {
+  const cached = state.cache.get(url);
+  if (cached && Date.now() - cached.time < CONFIG.CACHE_TTL) {
+    return cached.data;
+  }
+
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetch(url);
+      if (res.status === 429) {
+        await sleep(CONFIG.RETRY_DELAY * (i + 1));
+        continue;
+      }
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      state.cache.set(url, { data, time: Date.now() });
+      return data;
+    } catch (err) {
+      if (i === attempts - 1) throw err;
+      await sleep(CONFIG.RETRY_DELAY * (i + 1));
+    }
+  }
+}
+
+/* =========================
+LOCAL STORAGE (Continue Watching)
+========================= */
+const History = {
+  key: "zeroanime_history",
+  get() {
+    try { return JSON.parse(localStorage.getItem(this.key)) || []; } catch { return []; }
+  },
+  save(entry) {
+    let list = this.get();
+    list = list.filter(x => x.malId !== entry.malId);
+    list.unshift(entry);
+    if (list.length > 20) list = list.slice(0, 20);
+    localStorage.setItem(this.key, JSON.stringify(list));
+  },
+  remove(malId) {
+    const list = this.get().filter(x => x.malId !== malId);
+    localStorage.setItem(this.key, JSON.stringify(list));
+  }
+};
+
+/* =========================
+UI UPDATES
+========================= */
+function updateLabels() {
+  const isHentai = state.mode === "hentai";
+  $("#docTitle").innerText = isHentai ? "Zero Hentai" : "Zero Anime";
+  $("#topLogo").innerHTML = isHentai ? "🔞 ZERO HENTAI" : "⚡ ZERO ANIME";
+  $("#featuredTitleText").innerHTML = isHentai ? "🔥 Featured Hentai" : "🔥 Featured Watching";
+  $("#todayTitleText").innerHTML = isHentai ? "🗓️ Recent Releases" : "🗓️ Airing Today";
+  $("#libraryTitleText").innerHTML = isHentai ? "📚 Hentai Library" : "📚 Complete Library";
+  $("#scheduleTitleText").innerHTML = isHentai ? "📅 Top Rated Hentai" : "📅 Weekly Dates";
+}
+
+function showPage(page) {
+  state.currentPage = page;
+  $$(".page").forEach(p => p.classList.remove("active-page"));
+  $(`#${page}Page`).classList.add("active-page");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function setNavActive(page) {
+  $$(".nav button[data-page]").forEach(b => b.classList.toggle("active", b.dataset.page === page));
+}
+
+/* =========================
+GATES & NAV
+========================= */
+$("#animeGate").onclick = () => enterApp("anime");
+$("#hentaiGate").onclick = () => enterApp("hentai");
+
+function enterApp(mode) {
+  state.mode = mode;
+  updateLabels();
+  $("#landingPage").style.display = "none";
+  $("#appContainer").style.display = "block";
+  loadHome();
+  renderContinueWatching();
+}
+
+$("#exitBtn").onclick = () => {
+  $("#landingPage").style.display = "flex";
+  $("#appContainer").style.display = "none";
+  $("#featuredGrid").innerHTML = "";
+  $("#todaySchedule").innerHTML = "";
+  $("#detailContent").innerHTML = "";
+  showPage("home");
+  setNavActive("home");
+};
+
+$("#backBtn").onclick = () => {
+  showPage("home");
+  setNavActive("home");
+};
+
+$$(".nav button[data-page]").forEach(btn => {
+  btn.onclick = () => {
+    setNavActive(btn.dataset.page);
+    showPage(btn.dataset.page);
+    if (btn.dataset.page === "library") loadLibrary();
+    if (btn.dataset.page === "schedule") loadSchedule();
+  };
+});
+
+/* =========================
+HOME
+========================= */
+async function loadHome() {
+  $("#featuredGrid").innerHTML = renderSkeletonGrid(8);
+  $("#todaySchedule").innerHTML = renderSkeletonSchedule(5);
+
+  try {
+    await loadFeatured();
+    await sleep(800); // Respect rate limits
+    await loadToday();
+  } catch (e) {
+    console.error("Home load error:", e);
+  }
+}
+
+async function loadFeatured() {
+  const grid = $("#featuredGrid");
+  try {
+    const url = state.mode === "anime"
+      ? `${CONFIG.API}/top/anime?limit=12`
+      : `${CONFIG.API}/anime?rating=rx&order_by=popularity&sort=desc&limit=12`;
+    const data = await fetchWithRetry(url);
+    renderAnimeGrid(data.data || [], grid);
+  } catch (err) {
+    grid.innerHTML = `<div class="empty"><h2>Failed to load</h2><p>${err.message}</p></div>`;
+  }
+}
+
+async function loadToday() {
+  const container = $("#todaySchedule");
+  try {
+    let url;
+    if (state.mode === "anime") {
+      const days = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+      const today = days[new Date().getDay()];
+      url = `${CONFIG.API}/schedules?filter=${today}&limit=10`;
+    } else {
+      url = `${CONFIG.API}/anime?rating=rx&order_by=start_date&sort=desc&limit=10`;
+    }
+    const data = await fetchWithRetry(url);
+    renderScheduleList(data.data || [], container, state.mode === "anime");
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><h2>Failed</h2><p>${err.message}</p></div>`;
+  }
+}
+
+/* =========================
+LIBRARY
+========================= */
+async function loadLibrary() {
+  const grid = $("#libraryGrid");
+  grid.innerHTML = renderSkeletonGrid(12);
+  try {
+    const url = state.mode === "anime"
+      ? `${CONFIG.API}/top/anime?limit=24`
+      : `${CONFIG.API}/anime?rating=rx&order_by=popularity&limit=24`;
+    const data = await fetchWithRetry(url);
+    renderAnimeGrid(data.data || [], grid);
+  } catch (err) {
+    grid.innerHTML = `<div class="empty"><h2>Failed to load library</h2><p>${err.message}</p></div>`;
+  }
+}
+
+/* =========================
+SCHEDULE
+========================= */
+async function loadSchedule() {
+  const container = $("#fullSchedule");
+  container.innerHTML = renderSkeletonSchedule(10);
+  try {
+    if (state.mode === "anime") {
+      const data = await fetchWithRetry(`${CONFIG.API}/schedules`);
+      const daysOrder = ["monday","tuesday","wednesday","thursday","friday","saturday","sunday"];
+      container.innerHTML = "";
+      let hasAny = false;
+      daysOrder.forEach(day => {
+        const list = data.data?.[day];
+        if (list && list.length) {
+          hasAny = true;
+          list.slice(0, 6).forEach(anime => {
+            container.appendChild(createScheduleItem(anime, day));
+          });
+        }
+      });
+      if (!hasAny) container.innerHTML = `<div class="empty"><h2>No schedule data</h2></div>`;
+    } else {
+      const data = await fetchWithRetry(`${CONFIG.API}/anime?rating=rx&status=complete&order_by=score&sort=desc&limit=24`);
+      container.innerHTML = "";
+      (data.data || []).forEach(anime => {
+        const item = document.createElement("div");
+        item.className = "schedule-item";
+        item.onclick = () => showAnime(anime.mal_id);
+        item.innerHTML = `
+          <div class="schedule-title">${getTitle(anime)}</div>
+          <div class="schedule-time">⭐ Score: ${anime.score || "N/A"} • ${anime.episodes || "?"} EP</div>
+        `;
+        container.appendChild(item);
+      });
+    }
+  } catch (err) {
+    container.innerHTML = `<div class="empty"><h2>Failed</h2><p>${err.message}</p></div>`;
+  }
+}
+
+/* =========================
+RENDERERS
+========================= */
+function renderAnimeGrid(list, container) {
+  container.innerHTML = "";
+  if (!list.length) {
+    container.innerHTML = `<div class="empty"><h2>No content found</h2></div>`;
+    return;
+  }
+  list.forEach(anime => {
+    const card = document.createElement("div");
+    card.className = "anime-card";
+    card.onclick = () => showAnime(anime.mal_id);
+    const img = getImage(anime, "large");
+    const score = anime.score ? anime.score.toFixed(2) : "N/A";
+    card.innerHTML = `
+      <div class="card-image-wrap">
+        <img src="${img}" alt="${getTitle(anime)}" loading="lazy">
+        ${anime.score ? `<div class="card-badge">⭐ ${score}</div>` : ""}
+      </div>
+      <div class="anime-info">
+        <div class="type-tag">${anime.type || "TV"}</div>
+        <div class="anime-name">${getTitle(anime)}</div>
+        <div class="anime-meta">
+          <div>${anime.episodes || "?"} EP</div>
+          <div>${anime.status || ""}</div>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function renderScheduleList(list, container, showTime = true) {
+  container.innerHTML = "";
+  if (!list.length) {
+    container.innerHTML = `<div class="empty"><h2>Nothing found</h2></div>`;
+    return;
+  }
+  list.slice(0, 10).forEach(anime => {
+    container.appendChild(createScheduleItem(anime, null, showTime));
+  });
+}
+
+function createScheduleItem(anime, dayName = null, showTime = true) {
+  const item = document.createElement("div");
+  item.className = "schedule-item";
+  item.onclick = () => showAnime(anime.mal_id);
+  const title = getTitle(anime);
+  let timeText = "";
+  if (showTime) {
+    const broadcast = anime.broadcast?.time;
+    if (dayName) {
+      timeText = `🗓️ ${dayName.charAt(0).toUpperCase() + dayName.slice(1)} • ${broadcast || "Unknown"}`;
+    } else {
+      timeText = `🕒 ${broadcast || "Recent Release"}`;
+    }
+  } else {
+    timeText = `⭐ ${anime.score || "N/A"}`;
+  }
+  item.innerHTML = `<div class="schedule-title">${title}</div><div class="schedule-time">${timeText}</div>`;
+  return item;
+}
+
+function renderSkeletonGrid(count) {
+  return Array(count).fill(0).map(() => `
+    <div class="anime-card">
+      <div class="skeleton skeleton-card"></div>
+      <div style="padding:12px;">
+        <div class="skeleton skeleton-text short" style="width:40px;height:20px;margin-bottom:8px;"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text short"></div>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderSkeletonSchedule(count) {
+  return Array(count).fill(0).map(() => `
+    <div class="schedule-item" style="cursor:default;">
+      <div class="skeleton skeleton-text" style="width:70%;margin-bottom:8px;"></div>
+      <div class="skeleton skeleton-text short" style="width:40%;"></div>
+    </div>
+  `).join("");
+}
+
+/* =========================
+DETAIL PAGE
+========================= */
+async function showAnime(id) {
+  state.currentAnime = id;
+  state.currentEpisode = 1;
+  state.currentType = "sub";
+  state.episodes = [];
+
+  showPage("detail");
+  const detail = $("#detailContent");
+  detail.innerHTML = `
+    <div style="padding:40px;text-align:center;color:var(--cyan);">
+      <div style="width:40px;height:40px;border:3px solid rgba(58,250,253,0.2);border-top-color:var(--cyan);border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px;"></div>
+      Loading anime details...
+    </div>
+  `;
+
+  try {
+    // Fetch anime details
+    const animeData = await fetchWithRetry(`${CONFIG.API}/anime/${id}/full`);
+    const anime = animeData.data;
+
+    // Fetch episodes with pagination
+    let episodes = [];
+    let page = 1;
+    let hasNext = true;
+    while (hasNext && page <= 5) {
+      const epData = await fetchWithRetry(`${CONFIG.API}/anime/${id}/episodes?page=${page}`);
+      if (epData.data?.length) episodes.push(...epData.data);
+      hasNext = epData.pagination?.has_next_page || false;
+      page++;
+      if (hasNext) await sleep(600);
+    }
+
+    // Fallback: generate episodes from count if API returned none
+    const epCount = anime.episodes || 0;
+    if (!episodes.length && epCount > 0) {
+      for (let i = 1; i <= epCount; i++) {
+        episodes.push({ episode: i, title: `Episode ${i}`, mal_id: i });
+      }
+    }
+    // If still no episodes, at least provide episode 1
+    if (!episodes.length) {
+      episodes.push({ episode: 1, title: "Episode 1", mal_id: 1 });
+    }
+
+    state.episodes = episodes;
+
+    // Render detail
+    const title = getTitle(anime);
+    const img = getImage(anime, "large");
+    const genres = (anime.genres || []).map(g => `<div class="genre">${g.name}</div>`).join("");
+    const studios = (anime.studios || []).map(s => s.name).join(", ") || "Unknown";
+    const rating = anime.rating || "N/A";
+    const duration = anime.duration || "Unknown";
+    const year = anime.year || "Unknown";
+    const status = anime.status || "Unknown";
+    const synopsis = anime.synopsis ? anime.synopsis.substring(0, 600) + (anime.synopsis.length > 600 ? "..." : "") : "No synopsis available.";
+
+    detail.innerHTML = `
+      <div class="detail-layout">
+        <div class="player-section">
+          <div class="player-box">
+            <div class="player-container">
+              <iframe id="playerFrame" src="" allowfullscreen allow="fullscreen; autoplay; encrypted-media" sandbox="allow-same-origin allow-scripts allow-popups allow-forms"></iframe>
+              <div id="loadingOverlay" class="loading-overlay">Loading video source...</div>
+              <div id="errorOverlay" class="error-message">
+                <div style="font-size:3rem;margin-bottom:12px;">⚠️</div>
+                <p>Unable to load video source</p>
+                <p style="font-size:0.85rem;color:#94a3b8;margin-top:8px;">Try switching to Sub/Dub or another episode</p>
+                <button onclick="retryPlayer()">Retry</button>
+              </div>
+            </div>
+            <div class="player-controls">
+              <div class="control-group">
+                <button class="control-btn active" id="subBtn" onclick="switchType('sub')">📝 SUB</button>
+                <button class="control-btn" id="dubBtn" onclick="switchType('dub')">🎙️ DUB</button>
+              </div>
+              <div class="control-group">
+                <button class="control-btn episode-nav-btn" onclick="prevEpisode()">⏮ Prev</button>
+                <button class="control-btn episode-nav-btn" onclick="nextEpisode()">⏭ Next</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="episodes-section">
+            <div class="episodes-header">
+              <div class="section-title" style="margin:0;"><span class="line"></span>🎬 Episodes <span style="color:#64748b;font-size:0.9rem;margin-left:8px;">(${episodes.length})</span></div>
+            </div>
+            <div class="episode-list" id="episodeList"></div>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <div class="poster-wrap"><img src="${img}" alt="${title}"></div>
+          <h2>${title}</h2>
+          <div class="genre-wrap">${genres}</div>
+          <p class="synopsis">${synopsis}</p>
+          <div class="meta-grid">
+            <div class="meta-item">
+              <div class="meta-label">Score</div>
+              <div class="meta-value">⭐ ${anime.score || "N/A"}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Type</div>
+              <div class="meta-value">📺 ${anime.type || "TV"}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Episodes</div>
+              <div class="meta-value">🎞️ ${anime.episodes || "?"}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Year</div>
+              <div class="meta-value">📅 ${year}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Status</div>
+              <div class="meta-value">🟢 ${status}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Rating</div>
+              <div class="meta-value">🔞 ${rating}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Duration</div>
+              <div class="meta-value">⏱️ ${duration}</div>
+            </div>
+            <div class="meta-item">
+              <div class="meta-label">Studio</div>
+              <div class="meta-value">🏢 ${studios}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+
+    renderEpisodeButtons();
+    setupPlayerListeners();
+    playEpisode(1);
+  } catch (err) {
+    console.error("Detail error:", err);
+    detail.innerHTML = `
+      <div class="empty">
+        <h2>❌ Failed to load</h2>
+        <p>${err.message}</p>
+        <button class="back-btn" style="margin-top:20px;" onclick="showPage('home');setNavActive('home');">← Go Home</button>
+      </div>
+    `;
+  }
+}
+
+function renderEpisodeButtons() {
+  const list = $("#episodeList");
+  if (!list) return;
+  list.innerHTML = "";
+  const history = History.get();
+
+  state.episodes.forEach((ep, idx) => {
+    const epNum = parseInt(ep.episode) || (idx + 1);
+    const btn = document.createElement("div");
+    btn.className = "episode-btn";
+    btn.dataset.ep = epNum;
+    const watched = history.find(h => h.malId === state.currentAnime && h.episode === epNum);
+    if (watched) btn.classList.add("watched");
+
+    const title = ep.title && ep.title !== `Episode ${epNum}` ? ep.title : "";
+    btn.innerHTML = `EP ${epNum}${title ? `<div class="ep-title">${title}</div>` : ""}`;
+    btn.onclick = () => playEpisode(epNum);
+    list.appendChild(btn);
+  });
+}
+
+/* =========================
+PLAYER (MegaPlay Integration)
+========================= */
+function getPlayerUrl(malId, epNum, type) {
+  // Using MAL ID endpoint as specified by user
+  return `${CONFIG.PLAYER.base}/${CONFIG.PLAYER.type}/${malId}/${epNum}/${type}`;
+}
+
+function playEpisode(epNum) {
+  if (!state.currentAnime) return;
+  state.currentEpisode = epNum;
+
+  const frame = $("#playerFrame");
+  const loading = $("#loadingOverlay");
+  const error = $("#errorOverlay");
+  if (!frame) return;
+
+  const url = getPlayerUrl(state.currentAnime, epNum, state.currentType);
+
+  loading.style.display = "flex";
+  error.style.display = "none";
+  frame.src = "about:blank";
+
+  // Small delay to ensure loading state renders
+  requestAnimationFrame(() => {
+    frame.src = url;
+  });
+
+  // Update active episode button
+  $$(".episode-btn").forEach(btn => {
+    btn.classList.toggle("active", parseInt(btn.dataset.ep) === epNum);
+  });
+
+  // Save to continue watching
+  saveCurrentProgress(0);
+}
+
+function retryPlayer() {
+  $("#errorOverlay").style.display = "none";
+  $("#loadingOverlay").style.display = "flex";
+  const frame = $("#playerFrame");
+  const currentSrc = frame.src;
+  frame.src = "about:blank";
+  setTimeout(() => {
+    frame.src = currentSrc;
+  }, 500);
+}
+
+function switchType(type) {
+  state.currentType = type;
+  $("#subBtn")?.classList.toggle("active", type === "sub");
+  $("#dubBtn")?.classList.toggle("active", type === "dub");
+  playEpisode(state.currentEpisode);
+  showToast(`Switched to ${type.toUpperCase()}`);
+}
+
+function nextEpisode() {
+  const currentIdx = state.episodes.findIndex(ep => parseInt(ep.episode) === state.currentEpisode);
+  if (currentIdx >= 0 && currentIdx < state.episodes.length - 1) {
+    const nextEp = parseInt(state.episodes[currentIdx + 1].episode);
+    playEpisode(nextEp);
+    showToast(`Playing Episode ${nextEp}`);
+  } else {
+    showToast("This is the last episode");
+  }
+}
+
+function prevEpisode() {
+  const currentIdx = state.episodes.findIndex(ep => parseInt(ep.episode) === state.currentEpisode);
+  if (currentIdx > 0) {
+    const prevEp = parseInt(state.episodes[currentIdx - 1].episode);
+    playEpisode(prevEp);
+    showToast(`Playing Episode ${prevEp}`);
+  } else {
+    showToast("This is the first episode");
+  }
+}
+
+// Listen for player events from MegaPlay iframe
+window.addEventListener("message", (event) => {
+  // Only trust megaplay.buzz origin
+  if (!event.origin.includes("megaplay.buzz")) return;
+
+  let data = event.data;
+  if (typeof data === "string") {
+    try { data = JSON.parse(data); } catch (e) { return; }
+  }
+
+  // Handle MegaPlay events
+  if (data.channel === "megacloud" || data.type === "watching-log") {
+    if (data.event === "complete") {
+      showToast("Episode complete! Playing next...", 4000);
+      setTimeout(nextEpisode, 2000);
+    }
+    if (data.event === "error") {
+      $("#loadingOverlay").style.display = "none";
+      $("#errorOverlay").style.display = "flex";
+    }
+    if (data.event === "time" && data.percent) {
+      saveCurrentProgress(data.percent);
+    }
+    if (data.type === "watching-log" && data.currentTime && data.duration) {
+      const pct = (data.currentTime / data.duration) * 100;
+      if (Math.floor(pct) % 10 === 0) saveCurrentProgress(pct);
+    }
+  }
+});
+
+// Also handle iframe load/error events
+function setupPlayerListeners() {
+  const frame = $("#playerFrame");
+  if (!frame) return;
+  frame.onload = () => { $("#loadingOverlay").style.display = "none"; };
+  frame.onerror = () => {
+    $("#loadingOverlay").style.display = "none";
+    $("#errorOverlay").style.display = "flex";
+  };
+}
+
+function saveCurrentProgress(percent) {
+  if (!state.currentAnime) return;
+  const entry = {
+    malId: state.currentAnime,
+    episode: state.currentEpisode,
+    type: state.currentType,
+    percent: Math.min(percent, 100),
+    timestamp: Date.now(),
+    title: $(".sidebar h2")?.textContent || "Unknown",
+    image: $(".sidebar .poster-wrap img")?.src || ""
+  };
+  History.save(entry);
+}
+
+/* =========================
+CONTINUE WATCHING
+========================= */
+function renderContinueWatching() {
+  const section = $("#continueSection");
+  const grid = $("#continueGrid");
+  const list = History.get();
+
+  if (!list.length) {
+    section.style.display = "none";
+    return;
+  }
+
+  section.style.display = "block";
+  grid.innerHTML = "";
+
+  list.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "continue-card";
+    card.onclick = () => {
+      state.currentType = item.type || "sub";
+      showAnime(item.malId);
+      setTimeout(() => playEpisode(item.episode), 1500);
+    };
+    card.innerHTML = `
+      <img src="${item.image || 'https://via.placeholder.com/60x85'}" alt="">
+      <div class="continue-info">
+        <div class="continue-title">${item.title}</div>
+        <div class="continue-meta">EP ${item.episode} • ${item.type?.toUpperCase() || 'SUB'}</div>
+        <div class="progress-bar"><div class="progress-fill" style="width:${item.percent || 0}%"></div></div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+/* =========================
+SEARCH
+========================= */
+const searchInput = $("#searchInput");
+const searchResults = $("#searchResults");
+
+searchInput.addEventListener("input", () => {
+  clearTimeout(state.searchTimeout);
+  const q = searchInput.value.trim();
+  if (q.length < 2) {
+    searchResults.style.display = "none";
+    return;
+  }
+  state.searchTimeout = setTimeout(() => doSearch(q), CONFIG.DEBOUNCE);
+});
+
+async function doSearch(q) {
+  try {
+    let url = `${CONFIG.API}/anime?q=${encodeURIComponent(q)}&limit=12`;
+    if (state.mode === "hentai") url += `&rating=rx`;
+    const data = await fetchWithRetry(url);
+
+    if (!data.data?.length) {
+      searchResults.innerHTML = `<div class="empty" style="padding:20px;"><h2 style="font-size:1.2rem;">😢 No results</h2></div>`;
+      searchResults.style.display = "block";
+      return;
+    }
+
+    searchResults.innerHTML = "";
+    data.data.forEach(anime => {
+      const item = document.createElement("div");
+      item.className = "search-item";
+      item.onclick = () => {
+        showAnime(anime.mal_id);
+        searchResults.style.display = "none";
+        searchInput.value = "";
+      };
+      const img = anime.images?.jpg?.image_url || "";
+      item.innerHTML = `
+        <img src="${img}" alt="" loading="lazy">
+        <div style="min-width:0;">
+          <div style="font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${getTitle(anime)}</div>
+          <div style="font-size:0.8rem;color:#7dd3fc;margin-top:2px;">${anime.type || "TV"} • ⭐ ${anime.score || "N/A"}</div>
+        </div>
+      `;
+      searchResults.appendChild(item);
+    });
+    searchResults.style.display = "block";
+  } catch (err) {
+    console.error("Search error:", err);
+  }
+}
+
+document.addEventListener("click", (e) => {
+  if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+    searchResults.style.display = "none";
+  }
+});
+
+/* =========================
+KEYBOARD SHORTCUTS
+========================= */
+document.addEventListener("keydown", (e) => {
+  if (state.currentPage !== "detail") return;
+  if (e.key === "ArrowRight") nextEpisode();
+  if (e.key === "ArrowLeft") prevEpisode();
+  if (e.key.toLowerCase() === "s") switchType("sub");
+  if (e.key.toLowerCase() === "d") switchType("dub");
+});
+
+/* =========================
+INIT
+========================= */
+console.log("Zero Anime v2.0 - MegaPlay Integration Ready");
+</script>
+
+</body>
+</html>
